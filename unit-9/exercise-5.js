@@ -1,5 +1,5 @@
 // a, b lần lượt là điểm thi giữa kỳ, điểm thi cuối kỳ
-const ranks = (a, b, c) => {
+const ranks = (a, b) => {
   const medium = (a + b )/2
   if (medium >= 9.0) {
     return 'Hạng A'
