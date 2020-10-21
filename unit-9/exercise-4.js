@@ -1,11 +1,8 @@
-const confront = (a, b, c) => {
-  if( a > b ) {
+const compareNumber = (a, b, c) => {
+  if (a > b && a > c) {
     return a
-  }
-  if( b > c) {
+  } else if (b > c && b > a) {
     return b
-  }
-  if(a < c) {
-    return c
-  }
+  } else return c
 }
+console.log(compareNumber(0,1,3))

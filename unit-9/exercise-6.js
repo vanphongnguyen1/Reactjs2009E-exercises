@@ -1,26 +1,27 @@
+// pt: ax2 + bx + c = 0
+// thì đặt biến là a, b, c dễ hiểu hơn chứ a
 const equation = (a, b, c) => {
-  const dental = Math.pow(b,2) - (4 * a * c)
-  console.log(dental)
-  if( a === 0 && b === 0) {
+  const detal = b * b - (4 * a * c)
+  console.log(detal)
+  if (a === 0 && b === 0) {
     return 'Phương trình vô nghiệm'
   }
-  if( a === 0) {
-    return `Phương trình có 1 nghiệm ${-c/b}`
+  if (a === 0) {
+    return `Phương trình có 1 nghiệm ${-c / b}`
   }
-  if( dental < 0 ) {
+  if (detal < 0) {
     return 'Phương trình vô nghiệm'
   }
-  if( dental ===0 ) {
+  if (detal === 0) {
     const kp = -b / (2 * a)
     return `Phương trình có nghiệm kép x1 = x2 = ${kp}`
   }
-  if ( dental > 0 ) {
-    const x1 = (-b - Math.sqrt(dental)) / ( 2 * a)
-    const x2 = (-b + Math.sqrt(dental)) / ( 2 * a)
+  if (detal > 0) {
+    const x1 = (-b - Math.sqrt(detal)) / ( 2 * a)
+    const x2 = (-b + Math.sqrt(detal)) / ( 2 * a)
     return `
-        Phương trình có 2 nghiệp:
+        Phương trình có 2 nghiệm:
         x1 = ${x1}
-        x2 = ${x2}
-    `
+        x2 = ${x2}  `
   }
 }

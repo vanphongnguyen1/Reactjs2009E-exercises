@@ -1,16 +1,10 @@
-// a, b lần lượt là điểm thi giữa kỳ, điểm thi cuối kỳ
-const ranks = (a, b) => {
-  const medium = (a + b )/2
-  if (medium >= 9.0) {
-    return 'Hạng A'
-  }
-  if ( 7.0 <= medium && medium < 9.0) {
+// middleExamScore, lastExamScore lần lượt là điểm thi giữa kỳ, điểm thi cuối kỳ
+const getRank = (middleExamScore, lastExamScore) => {
+  const average = (middleExamScore + lastExamScore) / 2
+  if (average >= 9) return 'Hạng A'
+  if ( 7.0 <= average && average < 9.0) {
     return 'Hạng B'
-  }
-  if ( 5.0 <= medium && medium < 7.0) {
+  } else if ( 5.0 <= average && average < 7.0) {
     return 'Hạng C'
-  }
-  if ( 5.0 > medium) {
-    return 'Hạng F'
-  }
+  } else return 'Hạng F'
 }
