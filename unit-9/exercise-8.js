@@ -5,7 +5,7 @@ const getphoneCost = minutes => {
     return minutes * 600 + mandatoryFee
   }
   if( minutes > 50 && minutes <= 200) {
-    return (minutes - 50) * 400 + mandatoryFee
+    return (minutes - 50) * 400 + mandatoryFee + 50*600
   }
   if( minutes > 200) {
     return minutes * 200 + mandatoryFee

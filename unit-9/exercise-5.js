@@ -2,9 +2,9 @@
 const getRank = (middleExamScore, lastExamScore) => {
   const average = (middleExamScore + lastExamScore) / 2
   if (average >= 9) return 'Hạng A'
-  if ( 7.0 <= average && average < 9.0) {
+  if ( 7 <= average && average < 9) {
     return 'Hạng B'
-  } else if ( 5.0 <= average && average < 7.0) {
+  } else if ( 5 <= average && average < 7) {
     return 'Hạng C'
   } else return 'Hạng F'
 }

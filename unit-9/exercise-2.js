@@ -1,5 +1,2 @@
-const ageToClass = age => {
-  if( age >= 16 ) return true
-  return false
-}
+const ageToClass = age => age >= 16
 console.log(ageToClass(1))

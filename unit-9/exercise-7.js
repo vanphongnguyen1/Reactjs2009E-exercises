@@ -4,12 +4,10 @@ const commissionAmount = price => {
     const commissionAmount = price * 5 / 100
         // commissionAmount là mức hoa hồng được hưởng
     return `Hoa hồng được hưởng ${commissionAmount}`
-  }
-  if(price <= 300000000) {
+  } else if(price <= 300000000) {
     const commissionAmount = price * 10 / 100
     return `Hoa hồng được hưởng ${commissionAmount}`
-  }
-  if(price > 300000000) {
+  } else if(price > 300000000) {
     const commissionAmount = price * 20 / 100
     return `Hoa hồng được hưởng ${commissionAmount}`
   }
