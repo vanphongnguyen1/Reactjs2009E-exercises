@@ -1,24 +1,22 @@
-// pt: ax2 + bx + c = 0
-// thì đặt biến là a, b, c dễ hiểu hơn chứ a
-const equation = (a, b, c) => {
-  const detal = b * b - (4 * a * c)
+const equation = (numHidden1, numHidden2, numHidden3) => {
+  const detal = numHidden2 * numHidden2 - (4 * numHidden1 * numHidden3)
   console.log(detal)
-  if (a === 0 && b === 0) {
+  if (numHidden1 === 0 && numHidden2 === 0) {
     return 'Phương trình vô nghiệm'
   }
-  if (a === 0) {
-    return `Phương trình có 1 nghiệm ${-c / b}`
+  if (numHidden1 === 0) {
+    return `Phương trình có 1 nghiệm ${-numHidden3 / b}`
   }
   if (detal < 0) {
     return 'Phương trình vô nghiệm'
   }
   if (detal === 0) {
-    const kp = -b / (2 * a)
+    const kp = -numHidden2 / (2 * numHidden1)
     return `Phương trình có nghiệm kép x1 = x2 = ${kp}`
   }
   if (detal > 0) {
-    const x1 = (-b - Math.sqrt(detal)) / ( 2 * a)
-    const x2 = (-b + Math.sqrt(detal)) / ( 2 * a)
+    const x1 = (-numHidden2 - Math.sqrt(detal)) / ( 2 * numHidden1)
+    const x2 = (-numHidden2 + Math.sqrt(detal)) / ( 2 * numHidden1)
     return `
         Phương trình có 2 nghiệm:
         x1 = ${x1}
