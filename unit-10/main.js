@@ -114,12 +114,19 @@ const scoreMaxMin = {}
 let max = 0
 let min = 100
 students.forEach( student => {
-  if (student.score > max) {
-    max = student
-  } else if (student.score < min){
-    min = student
+  if (student.score >= max) {
+    max = student.score
+  } else if (student.score <= min) {
+    min = student.score
   }
 })
+for( let i = 0; i < students.length; i++) {
+  if (students[i].score === max) {
+    max = students[i]
+  } else if (students[i].score === min) {
+    min = students[i]
+  }
+}
 scoreMaxMin.theBest = max
 scoreMaxMin.theBad = min
 console.log(scoreMaxMin)
