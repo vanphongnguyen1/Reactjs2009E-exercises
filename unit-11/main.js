@@ -1,6 +1,6 @@
 /* Bài 1: Viết 1 hàm trả về 1 array, nhận vào 2 tham số,
   tham số thứ 1 là ký tự cần lặp, tham số thứ 2 là số lần lặp */
-// Cách 1:
+// Method 1:
 const getArr = (string, lengthArr) => {
   const arr = []
   for (let i = 0; i < lengthArr; i++) {
@@ -9,7 +9,7 @@ const getArr = (string, lengthArr) => {
   return arr
 }
 
-// Cách 2:
+// Method 2:
 const getArr = (string, lengthArr) => {
   let i = 0
   const arr = []
@@ -38,7 +38,8 @@ const eraseFalsy = arr => arr.filter(element => element)
 const createObj = dataArr => {
   const obj = {}
   dataArr.forEach(arr => {
-    obj[arr[0]] = arr[1]
+    const [key, value] = arr
+    obj[key] = value
   })
   return obj
 }
@@ -48,7 +49,7 @@ const sortArr = arr => arr.sort()
 
 /* Bài 6: Kiểm tra input đầu vào có phải là object hay không? */
 const checkTypes = obj => {
-  if (Array.isArray(obj) || typeof obj !== 'object') {
+  if (Array.isArray(obj) || obj === null || typeof obj !== 'object') {
     return false
   } else {
     return true
@@ -60,20 +61,21 @@ const checkTypes = obj => {
   truyền vào a, c
   return { b: 2, d: 4 } */
 const getKeys = (obj, arr) => {
+  const newObj = {...obj}
   arr.forEach(elem => {
-    for (let key in obj) {
+    for (let key in newObj) {
       if (key === elem) {
-        delete(obj[key])
+        delete newObj[key]
       }
     }
   })
-  return obj
+  return newObj
 }
 
 /* Bài 8: Viết hàm nhập vào 1 array có nhiều hơn 5 phần tử
   Xóa phần tử số 2, 3 trong array Return mảng sau khi đã xóa */
 const getArr = arr => {
-  const eleDelete =  arr.splice(1,2)
+  const eleDelete =  arr.splice(2, 2)
   return arr
 }
 
@@ -88,12 +90,14 @@ const students = [
   { id: 7, name: 'Trần Minh Minh', score: 6.1 }
 ]
 // ['Pass', 'Fail', 'Fail', 'Pass', 'Pass', 'Fail', 'Pass']
+// tên ở vị trí 0 và length -1, thằng ở giữa có duy thì fail
 const findStudent = students => {
   const newArr = []
   students.map(student => {
     const { name, score } = student
-    const lengName = name.length
-    if (score > 5 && name.lastIndexOf('Duy', lengName - 4) === -1) {
+    const nameTrim = name.trim().replace(/[ ]{2,}/g, ' ').split(' ')
+    const index = nameTrim.length
+    if (score > 5 && nameTrim[index - 2] !== 'Duy') {
       newArr.push('Pass')
     } else {
       newArr.push('Fail')
@@ -115,18 +119,12 @@ const students = [
 const findStudent = students => {
   const scorePass = []
   students.forEach(student => {
-    const score = student.score
-    const scoreInt = Number.parseInt(score)
-    const numFloat = (score - scoreInt) * 10
-    const scoreFloat = Math.round(numFloat)
-    const sum = scoreInt + scoreFloat
-    if (sum >= 10) {
-      const lastNum = sum - 10
-      if (lastNum > 5) {
-        scorePass.push(lastNum)
-      }
-    } else if (sum > 5) {
-      scorePass.push(sum)
+    const score = '' + student.score
+    const [firstNum, lastNum] = score.split('.')
+    const totalStr = String(Number(firstNum) + Number(lastNum))
+    const result = totalStr.substr(-1)
+    if (result > 5) {
+      scorePass.push(Number(result))
     }
   })
   return scorePass
