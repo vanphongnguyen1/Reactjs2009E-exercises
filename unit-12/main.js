@@ -1,6 +1,6 @@
 /* Exercises 1: */
 const checkEleSame = (array1, array2) => {
-  return array1.every((value,index) => value === array2[index])
+  return array1.every((value, index) => value === array2[index])
 }
 const isEqual = (arr1, arr2) => {
   if (arr1.length === arr2.length && checkEleSame(arr1, arr2)) {
