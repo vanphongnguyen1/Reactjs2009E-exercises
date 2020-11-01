@@ -14,8 +14,9 @@ const isEqual = (arr1, arr2) => {
 const flatten = data => data.flat(Infinity)
 
 /* Exercises 3: */
+//method 1:
 const data = [1, 2, 3, 4, 5, 6, 7];
-const shelfChunk = function(data, n) {
+const shelfChunk = (data, n) => {
   const result = []
   const newArr = []
   for (let i = 0; i < data.length; i++) {
@@ -29,6 +30,17 @@ const shelfChunk = function(data, n) {
   }
   result.push(newArr)
   return result.filter(ele => ele.length > 0)
+}
+
+// method 2: đi tham khảo )))
+const data = [1, 2, 3, 4, 5, 6, 7];
+const shelfChunk = (data, n) => {
+  const result = []
+  for (let i = 0; i < data.length; i += n) {
+    const cutElem = data.slice(i, i + n)
+    result.push(cutElem)
+  }
+  return result
 }
 
 /* Exercises 4: */
