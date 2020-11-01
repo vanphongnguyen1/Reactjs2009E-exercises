@@ -3,11 +3,9 @@ const checkEleSame = (array1, array2) => {
   return array1.every((value, index) => value === array2[index])
 }
 const isEqual = (arr1, arr2) => {
-  if (arr1.length === arr2.length && checkEleSame(arr1, arr2)) {
-    return true
-  } else {
-    return false
-  }
+  const condition = true
+  if (arr1.length === arr2.length && checkEleSame(arr1, arr2))
+    return condition
 }
 
 /* Exercises 2: */
@@ -16,15 +14,15 @@ const flatten = data => data.flat(Infinity)
 /* Exercises 3: */
 //method 1:
 const data = [1, 2, 3, 4, 5, 6, 7];
-const shelfChunk = (data, n) => {
+const shelfChunk = (data, numIndex) => {
   const result = []
   const newArr = []
   for (let i = 0; i < data.length; i++) {
-    if (newArr.length < n) {
+    if (newArr.length < numIndex) {
       newArr.push(data[i])
     }
-    if (newArr.length === n) {
-      const subArr = newArr.splice(0, n)
+    if (newArr.length === numIndex) {
+      const subArr = newArr.splice(0, numIndex)
       result.push(subArr)
     }
   }
@@ -76,14 +74,10 @@ const expiryTime = new Date(2020, 9, 30, 12, 30, 32)
 // const timeCheck = 'Sat Oct 31 2020 15:44:22 GMT+0700'
 const timeCheck = 'Fri Oct 30 2020 12:30:30'
 const checkSale = (expiryTime, timeCheck) => {
-  if (Date.parse(timeCheck) < Date.parse(expiryTime)) {
-    return true
-  } else {
-    return false
-  }
+  return Date.parse(timeCheck) < Date.parse(expiryTime)
 }
 
-  /* Exercises 6: */
+/* Exercises 6: */
 const checkEmail = email => {
   const checkEmail = /^([A-Za-z0-9]{1})([\._-]?[a-z0-9]+)*@([a-z]{5,7})(\.[a-z]{2,3})+$/
   return checkEmail.test(email)
