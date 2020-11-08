@@ -69,6 +69,21 @@ const compareEleArrs = function()  {
   })
 }
 
+//Chữa b4
+const findSameItem = (arr1, arr2) => {
+  return _.intersection(arr1, arr2)
+}
+const findSameItems = (...arrs) => {
+  const [same] = arrs
+  for (let i = 1; i < arrs.length; i++) {
+    same = findSameItem(same, arrs[i])
+    if (!same.length) {
+      return []
+    }
+  }
+  return same
+}
+
 /* Exercises 5: */
 const expiryTime = new Date(2020, 9, 30, 12, 30, 32)
 // const timeCheck = 'Sat Oct 31 2020 15:44:22 GMT+0700'
