@@ -1,0 +1,93 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.container {
+    width: 1200px;
+}
+.row {
+    width: 1024px;
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto;
+}
+div[class^="col-"] {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.col-3 {
+    width: calc(3/12 * 100%);
+}
+h2 {
+    font-size: 19px;
+    text-align: center;
+}
+.title {
+    margin-top: 10px;
+    display: inline-block;
+}
+.num-input {
+    width: 100%;
+    padding: 2px 5px;
+    outline: none;
+}
+.submit {
+    margin: 10px 0;
+    border: none;
+    outline: none;
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 3px;
+    background-color: #ccc;
+    color: #1e1e1e;
+    font-weight: 700;
+    cursor: pointer;
+}
+.red {
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+.green {
+    background-color: green;
+}
+.excises-3 {
+    margin-top: 20px;
+    text-align: center;
+}
+.select {
+    outline: none;
+}
+.list-product {
+    margin-left: 75px;
+    margin-top: 20px;
+}
+.excises-4 {
+    margin-top: 20px;
+}
+.menu ul li {
+    list-style: none;
+    border-bottom: 1px solid #fff;
+}
+.menu ul li a {
+    text-decoration: none;
+    display: block;
+    padding: 10px 5px;
+    color: #1e1e1e;
+    background: #ccc;
+    border-radius: 3px;
+    transition: all 0.3s ease-in-out;
+}
+.menu ul li a:hover {
+    background: #b9b8b8;
+}
+.menu .drop-menu li a {
+    background: #f1f1f1;
+    transition: all 0.3s ease-in-out;
+}
+.menu .drop-menu li a:hover {
+    background: #e5e5e5;
+}
