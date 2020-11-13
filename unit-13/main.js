@@ -15,9 +15,7 @@ submit.addEventListener('click', sum)
 
 // Excises 2:
 const red = document.querySelector('.red')
-const redToGreen = () => {
-  return red.classList.toggle('green')
-}
+const redToGreen = () => red.classList.toggle('green')
 red.addEventListener('click', redToGreen)
 
 // Excises 3:
