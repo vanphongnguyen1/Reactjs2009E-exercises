@@ -299,28 +299,26 @@ a {
     background-color: #f35b6a;
     border: 1px solid #7d6484;
 }
+.box_text:hover {
+    background-color: #ec5d6b;
+}
 .box_left,
 .box_right {
     position: absolute;
     bottom: 0;
     transform: scale(1);
     display: none;
-}
-.timeline_item:hover .box_left {
     animation: timeline-scale 0.4s ease-in-out;
-    transform-origin: right 90%;
-}
-.timeline_item:hover .box_right {
-    animation: timeline-scale 0.4s ease-in-out;
-    transform-origin: left 90%;
 }
 .box_left {
     right: 100%;
     margin-right: 25px;
+    transform-origin: right 90%;
 }
 .box_right {
     left: 100%;
     margin-left: 25px;
+    transform-origin: left 90%;
 }
 .box_left::before,
 .box_right::before {

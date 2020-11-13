@@ -124,7 +124,9 @@ const inputShallowMenu = (tagUlShallow, shallowMenu, listIconShallow = {}) => {
   const shallow = document.querySelector('.shallow')
   for (let i = 0; i < shallowMenu.length; i++) {
     const tagLi = document.createElement('li')
-    tagLi.appendChild(inputTagA(listIconShallow, shallowMenu[i]))
+    tagLi.appendChild(
+      inputTagA(listIconShallow, shallowMenu[i])
+    )
     tagLi.classList.add('shallow-item')
     if (shallowMenu[i].children) {
       const ul = document.createElement('ul')
@@ -338,8 +340,8 @@ const inputMenuDeep = (tagUlDeep, deepMenu) => {
     spanIconSearch.insertAdjacentHTML('afterbegin', '<i class="fas fa-search"></i>')
 
     //input search
-    inputSearch.setAttribute('type','text')
-    inputSearch.setAttribute('placeholder','Search....')
+    inputSearch.setAttribute('type', 'text')
+    inputSearch.setAttribute('placeholder', 'Search....')
     inputSearch.classList.add('menu-deep_search')
 
     //li search
@@ -372,9 +374,6 @@ document.querySelectorAll('.menu-deep_list .menu-deep_item')
 listEleMenuDeep.forEach(ele => {
   ele.addEventListener('click', eventMenuDeep)
 })
-  // lỗi bài menu deep
-  // lỗi khi click vào ô input Search
-  // lỗi hiệu hứng khi fold vào các item của ul con
 
 // -------------timeline----------------------------
 const timeline = [
@@ -431,7 +430,7 @@ const eventTimeline = e => {
 }
 
 const eleEventTimeline =
-document.querySelectorAll('.timeline_list > .timeline_item')
+document.querySelectorAll('.timeline_list .timeline_item')
 eleEventTimeline.forEach(ele => {
   ele.addEventListener('click', eventTimeline)
 })
