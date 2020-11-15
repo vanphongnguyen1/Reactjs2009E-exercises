@@ -214,16 +214,19 @@ a {
     cursor: pointer;
     z-index: 3;
 }
+.menu-dropdown_list .menu-deep_item:first-child {
+    position: relative;
+}
 .menu-dropdown_list .menu-deep_item:first-child::after {
     content: "";
     position: absolute;
-    left: 0;
+    left: 1px;
     top: 50%;
     border-right: 6px solid #e57d23;
     transform: translate(-100%,-50%);
     border-bottom: 6px solid transparent;
     border-top: 6px solid transparent;
-    z-index: 2;
+    z-index: 3;
     cursor: pointer;
 }
 /* input search */
