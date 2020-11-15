@@ -11,6 +11,9 @@ a {
 .display-block.display-block.display-block.display-block {
     display: block;
 }
+.relative{
+    position: relative;
+}
 
 /* Excises-1 menu shallow*/
 .shallow {
@@ -101,8 +104,6 @@ a {
 .menu-deep_list .menu-deep_item {
     list-style: none;
     background-color: #fff;
-    position: relative;
-    z-index: 2;
 }
 .menu-deep_list .menu-deep_item:first-child {
     border-radius: 3px 3px 0 0;
@@ -145,7 +146,7 @@ a {
     color: #e6822b;
 }
 .menu-deep_list > .menu-deep_item .menu-deep_link.menu-deep_active {
-    box-shadow: 0px 0px 3px #999;
+    box-shadow: 0px 0px 2px #999;
     position: relative;
     color: #e6822b;
 }

@@ -318,9 +318,11 @@ const createMenuDeep = (tagUlDeep, deepMenu) => {
       ul.classList.add('menu-dropdown_list')
       createMenuDeep(ul, deepMenu[i].children)
       tagLi.appendChild(ul)
+      tagLi.classList.add('relative')
     }
     if (deepMenu[i].isActive) {
       tagLi.classList.add('menu-deep_active-pseudo')
+      tagLi.classList.add('relative')
       tagA.classList.add('menu-deep_active')
     }
     tagUlDeep.classList.toggle('menu-deep_list')
