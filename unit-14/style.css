@@ -8,7 +8,7 @@ a {
     text-decoration: none;
     color: #000;
 }
-.dsp.dsp.dsp.dsp {
+.display-block.display-block.display-block.display-block {
     display: block;
 }
 
@@ -224,11 +224,6 @@ a {
     border-top: 6px solid transparent;
     z-index: 2;
     cursor: pointer;
-}
-.menu-deep_click > .menu-dropdown_list {
-    opacity: 1;
-    visibility: visible;
-    left: 100%;
 }
 /* input search */
 .menu-deep_list .menu-deep_item .menu-deep_box {

@@ -119,28 +119,32 @@ const listIconShallow = {
   Settings: '<i class="fas fa-cog"></i>'
 }
 
-const tagUlShallow = document.createElement('ul')
-const inputShallowMenu = (tagUlShallow, shallowMenu, listIconShallow = {}) => {
-  const shallow = document.querySelector('.shallow')
+const createMenuShallow = (tagUl, shallowMenu, listIconShallow = {}) => {
   for (let i = 0; i < shallowMenu.length; i++) {
     const tagLi = document.createElement('li')
     tagLi.appendChild(
-      inputTagA(listIconShallow, shallowMenu[i])
+      createTagAMenuShallow(listIconShallow, shallowMenu[i])
     )
     tagLi.classList.add('shallow-item')
     if (shallowMenu[i].children) {
       const ul = document.createElement('ul')
-      inputShallowMenu(ul, shallowMenu[i].children)
+      createMenuShallow(ul, shallowMenu[i].children)
       tagLi.appendChild(ul)
       ul.classList.add('shallow_dropdown-list')
     }
-    tagUlShallow.appendChild(tagLi)
-    tagUlShallow.classList.add('shallow-list')
+    tagUl.appendChild(tagLi)
+    tagUl.classList.add('shallow-list')
   }
-  shallow.appendChild(tagUlShallow)
 }
 
-const inputTagA = (listIconShallow = {}, shallowMenu) => {
+const renderMenuShallow = () => {
+  const tagUl = document.createElement('ul')
+  createMenuShallow(tagUl, shallowMenu, listIconShallow)
+  const boxShallow = document.querySelector('.shallow')
+ boxShallow.appendChild(tagUl)
+}
+
+const createTagAMenuShallow = (listIconShallow = {}, shallowMenu) => {
   const iconArrow = '<i class="fas fa-angle-right"></i>'
   const tagA = document.createElement('a')
   const spanText = document.createElement('span')
@@ -169,10 +173,10 @@ const inputTagA = (listIconShallow = {}, shallowMenu) => {
   return tagA
 }
 
-inputShallowMenu(tagUlShallow, shallowMenu, listIconShallow)
+renderMenuShallow()
 
 // Tạo Event click item
-const clickItemShallow = e => {
+const eventClickShallow = e => {
   // console.log(e.currentTarget)
   const borderItem = e.currentTarget
   const clickNodeText = borderItem.querySelectorAll('.shallow_dropdown-list')
@@ -181,13 +185,13 @@ const clickItemShallow = e => {
   const iconArrow = borderItem.querySelector('.shallow-icon--arrow')
   iconArrow.classList.toggle('shallow-icon--reotate')
   clickNodeText.forEach(item => {
-    item.classList.toggle('dsp')
+    item.classList.toggle('display-block')
   })
 }
 
 const listLi = document.querySelectorAll('.shallow-list .shallow-item')
 listLi.forEach(li => {
-  li.addEventListener('click', clickItemShallow)
+  li.addEventListener('click', eventClickShallow)
 })
 
 // Menu Deep---------------------------------------------------
@@ -278,9 +282,7 @@ const deepMenu = [
   },
 ]
 
-const tagUlDeep = document.createElement('ul')
-const inputMenuDeep = (tagUlDeep, deepMenu) => {
-  const boxMenu = document.querySelector('.bg_menu-deep')
+const createMenuDeep = (tagUlDeep, deepMenu) => {
   for (let i = 0; i < deepMenu.length; i++) {
     const tagLi = document.createElement('li')
     const tagA = document.createElement('a')
@@ -290,27 +292,22 @@ const inputMenuDeep = (tagUlDeep, deepMenu) => {
     const title = document.createElement('span')
     const subTitle = document.createElement('span')
 
-    // li
     tagLi.appendChild(tagA)
     tagLi.classList.add('menu-deep_item')
 
-    //a
     tagA.href = deepMenu[i].link
     tagA.classList.add('menu-deep_link')
     tagA.appendChild(spanIcon)
     tagA.appendChild(boxText)
 
-    //i + spanIcon
     iIcon.className = deepMenu[i].icon
     spanIcon.appendChild(iIcon)
     spanIcon.classList.add('menu-deep_icon')
 
-    //boxTexxt
     boxText.appendChild(title)
     boxText.appendChild(subTitle)
     boxText.classList.add('menu-deep_boxtext')
 
-    //title + subtitle
     title.innerText = deepMenu[i].title
     title.classList.add('menu-deep_text')
     subTitle.innerText = deepMenu[i].subTitle
@@ -319,60 +316,63 @@ const inputMenuDeep = (tagUlDeep, deepMenu) => {
     if (deepMenu[i].children) {
       const ul = document.createElement('ul')
       ul.classList.add('menu-dropdown_list')
-      inputMenuDeep(ul, deepMenu[i].children)
+      createMenuDeep(ul, deepMenu[i].children)
       tagLi.appendChild(ul)
+    }
+    if (deepMenu[i].isActive) {
+      tagLi.classList.add('menu-deep_active-pseudo')
+      tagA.classList.add('menu-deep_active')
     }
     tagUlDeep.classList.toggle('menu-deep_list')
     tagUlDeep.appendChild(tagLi)
   }
+
   /*   // Xử lý để in ra input search
-    ul cha mà trong ul con không có cảm thấy cách chưa ổn lắm
-    Chưa nghĩ ra cách nào xử lý ok hơn
+    Chưa nghĩ ra cách nào xử lý ok hơn, xử lý bị cứng
  */
   if (deepMenu.length >= 7) {
-    const inputSearch = document.createElement('input')
+    tagUlDeep.appendChild(
+      boxSearch()
+    )
+  }
+}
+
+const boxSearch = () => {
+  const inputSearch = document.createElement('input')
     const boxSearch = document.createElement('div')
     const liFast = document.createElement('li')
     const spanIconSearch = document.createElement('span')
 
-    //input span icon
     spanIconSearch.classList.add('menu-deep_search-icon')
     spanIconSearch.insertAdjacentHTML('afterbegin', '<i class="fas fa-search"></i>')
 
-    //input search
     inputSearch.setAttribute('type', 'text')
     inputSearch.setAttribute('placeholder', 'Search....')
     inputSearch.classList.add('menu-deep_search')
 
-    //li search
     liFast.classList.add('menu-deep_item')
     liFast.appendChild(boxSearch)
 
-    // box search
     boxSearch.classList.add('menu-deep_box')
     boxSearch.appendChild(inputSearch)
     boxSearch.appendChild(spanIconSearch)
 
-    tagUlDeep.appendChild(liFast)
+    return liFast
+}
+
+const renderMenuDeep = () => {
+  const tagUl = document.createElement('ul')
+  createMenuDeep(tagUl, deepMenu)
+  const boxMenu = document.querySelector('.bg_menu-deep')
+  boxMenu.appendChild(tagUl)
   }
 
-  boxMenu.appendChild(tagUlDeep)
-}
-inputMenuDeep(tagUlDeep, deepMenu)
-
-const eventMenuDeep = e => {
-  e.preventDefault()
-  const eleActivee = e.currentTarget
-  const eleLink = eleActivee.querySelector('.menu-deep_link')
-  eleLink.classList.toggle('menu-deep_active')
-  eleActivee.classList.toggle('menu-deep_active-pseudo')
-  eleActivee.classList.toggle('menu-deep_click')
-}
+renderMenuDeep()
 
 const listEleMenuDeep =
 document.querySelectorAll('.menu-deep_list .menu-deep_item')
 listEleMenuDeep.forEach(ele => {
-  ele.addEventListener('click', eventMenuDeep)
+  ele.addEventListener('click', e => e.preventDefault())
 })
 
 // -------------timeline----------------------------
@@ -386,8 +386,7 @@ const timeline = [
   }
 ]
 
-const showTimeline = timeline => {
-  const tagUl = document.createElement('ul')
+const showTimeline = (timeline, tagUl) => {
   timeline.forEach(item => {
     for (let key in item) {
       const tagLi = document.createElement('li')
@@ -417,16 +416,21 @@ const showTimeline = timeline => {
     }
   })
   tagUl.classList.add('timeline_list')
+}
+
+const renderTimeline = () => {
+  const box = document.querySelector('.timeline')
+  const tagUl = document.createElement('ul')
+  showTimeline(timeline, tagUl)
   box.appendChild(tagUl)
 }
 
-const box = document.querySelector('.timeline')
-showTimeline(timeline)
+renderTimeline()
 
 const eventTimeline = e => {
   const eleClick = e.currentTarget
   const box = eleClick.querySelector('.box_text')
-  box.classList.toggle('dsp')
+  box.classList.toggle('display-block')
 }
 
 const eleEventTimeline =
