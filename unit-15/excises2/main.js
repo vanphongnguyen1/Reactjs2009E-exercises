@@ -16,7 +16,7 @@ const pokemons = [
 ]
 const listPokemonSelect = []
 
-const render = pokemons => {
+const renderPokemon = pokemons => {
   const boxPokemon = document.querySelector('.box_pokemon')
   const listPokemon = boxPokemon.querySelector('.pokemon_list')
   let html = ''
@@ -36,6 +36,7 @@ const showInfoPokemon = (e, id) => {
   const parentTarget = e.target.parentElement
   const infoPokemon = document.querySelector('.box_show-pokemon')
   const boxListPokemon = document.querySelector('.pokemon_list')
+
   const listPokemont = boxListPokemon.querySelectorAll('.pokemon_item')
   listPokemont.forEach(item => item.classList.remove('pokemon-active'))
 
@@ -65,26 +66,16 @@ const showInfoPokemon = (e, id) => {
         </span>
       </div>
       <button type="button"
-        class="btn btn-primary add-pokemon"
-        onclick="addPokemon(event, ${pokemon.id})">ADD</button> `
+        class="btn btn-secondary add-pokemon"
+        onclick="addPokemon(event, ${pokemon.id})">ADD</button>
+      <span class="messeage-full-select">You have select 5 Pokemon</span>`
     }
   })
   infoPokemon.innerHTML = html
-  messageNote()
-}
 
-const messageNote = () => {
-  const infoPokemon = document.querySelector('.box_show-pokemon')
-  if (listPokemonSelect.length >= 5) {
-    infoPokemon.insertAdjacentHTML(
-      'beforeend',
-      '<span class="messeage-full-select">You have select 5 Pokemon</span>'
-    )
-  } else {
-    infoPokemon.insertAdjacentHTML(
-      'beforeend',
-      '<span class="messeage-full-select"></span>'
-    )
+  const messageNote = document.querySelector('.messeage-full-select')
+  if (listPokemonSelect.length === 5) {
+    messageNote.style.display = 'block'
   }
 }
 
@@ -107,7 +98,7 @@ const addPokemon = (e, id) => {
         listPokemonSelect.push(pokemon)
       }
     })
-    e.target.style.display = 'none'
+    e.target.setAttribute('disabled', 'disabled')
     renderShowPokemon(listPokemonSelect)
   } else {
     confirm('Chỉ có thể chọn tối ta 5 Pokemon')
@@ -122,7 +113,7 @@ const renderShowPokemon = listPokemonSelect => {
         listShowPokemon[i].innerHTML = `
           <div class="box-select">
             <span class="icon-close"
-              onclick="closePokemon(event, ${pokemonSelect.id})">
+              onclick="closePokemon(${pokemonSelect.id})">
                 <i class="fas fa-times"></i>
             </span>
             <img src="./img/${pokemonSelect.name.toLowerCase()}.png"
@@ -134,7 +125,7 @@ const renderShowPokemon = listPokemonSelect => {
   })
 }
 
-const closePokemon = (e, i) => {
+const closePokemon = i => {
   const listShowPokemon = document.querySelectorAll('.pokemon-select_item')
   listShowPokemon.forEach(ele => {
     ele.innerHTML = ''
@@ -144,26 +135,32 @@ const closePokemon = (e, i) => {
       }
     })
   })
-  payEventAtClose(e, i)
+  const messageNote = document.querySelector('.messeage-full-select')
+  if (listPokemonSelect.length < 5) {
+    messageNote.style.display = 'none'
+  }
+  payEventAtClose(i)
   renderShowPokemon(listPokemonSelect)
 }
 
 // khi xóa pokemon được select thì trả các event add click cho pokemon
-const payEventAtClose = (e, i) => {
+const payEventAtClose = i => {
   const boxListPokemon = document.querySelector('.pokemon_list')
-  const listPolemon = boxListPokemon.querySelectorAll('.pokemon_item')
+  const listPokemon = boxListPokemon.querySelectorAll('.pokemon_item')
   const boxShow = document.querySelector('.box_show-pokemon')
   const btn = boxShow.querySelector('.add-pokemon')
-  listPolemon.forEach(item => {
+
+  listPokemon.forEach(item => {
     const id = item.children[0].getAttribute('id-data')
     if (i === Number(id)) {
       item.classList.remove('overlay')
-      btn.style.display = 'inline-block'
+      btn.removeAttribute('disabled')
     }
   })
-  showInfoPokemon(e, i)
 }
 
-const fixTitleSelect = e => e.target.setAttribute('contentEditable', 'true')
-document.querySelector('.heading_box-select').addEventListener('dblclick', fixTitleSelect)
-render(pokemons)
+window.onload = () => {
+  const fixTitleSelect = e => e.target.setAttribute('contentEditable', 'true')
+  document.querySelector('.heading_box-select').addEventListener('dblclick', fixTitleSelect)
+  renderPokemon(pokemons)
+}

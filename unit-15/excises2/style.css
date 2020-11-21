@@ -58,7 +58,7 @@
     text-align: center;
     border: 1px solid #eaeaea;
     padding: 20px 50px;
-    height: 430px;
+    height: 470px;
 }
 .box_show-pokemon .pokemon_img {
     width: 150px;
@@ -77,20 +77,19 @@
 }
 .box_atk-text,
 .box_hp-text {
-    display: block;
     margin-right: 20px;
-    font-size: 13px;
+    font-size: 16px;
     width: 30px;
+    height: 21px;
 }
 .box_atk-number,
 .box_hp-number {
-    display: block;
     margin-right: 12px;
     width: 40px;
+    font-size: 22px;
 }
 .box_atk-background,
 .box_hp-background {
-    display: block;
     height: 10px;
     background: #eeeeee;
     width: 100%;
@@ -119,9 +118,6 @@
     color: #fff;
     margin: 20px 0;
     cursor: pointer;
-}
-.add-pokemon:hover {
-    background: #1b9b81;
 }
 
 /* ------------------------------------------------------ */
@@ -181,7 +177,7 @@
     background: rgba(0,0,0,0.5);
 }
 .messeage-full-select {
-    display: block;
+    display: none;
     font-size: 14px;
     color: red;
 }
