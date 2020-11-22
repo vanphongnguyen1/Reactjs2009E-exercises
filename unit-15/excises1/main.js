@@ -12,10 +12,10 @@ const infoUser = () => {
     age: age
   }
   users.push(user)
-  render()
+  render(users)
 }
 
-const render = () => {
+const render = users => {
   const thead = document.querySelector('.heading-table')
   const th = thead.querySelector('th:first-child')
   th.innerHTML = `<input type="checkbox" name="" id="">`
@@ -45,7 +45,7 @@ const render = () => {
                 Save
             </button>
             <button type="button"
-              onclick="editCancel(event, ${i})"
+              onclick="editCancel(event)"
               class="btn btn-warning box_active-table--cancel">
                 Cancel
             </button>
@@ -67,7 +67,7 @@ const deleteUser = index => {
   if(confirm('Bạn có muốn xóa user ?')) {
     users.splice(index,1)
   }
-  render()
+  render(users)
 }
 
 const editUser = (e, index) => {
@@ -79,7 +79,7 @@ const editUser = (e, index) => {
   activeTableinSave.classList.add('d-inline-block')
   activeTableinCancel.classList.add('d-inline-block')
 
-  const boxParent = patentEdit.parentElement.parentElement
+  const boxParent = getParent(activeTableinSave, 'tr')
   const fixName = boxParent.querySelector('td:nth-child(3)')
   const fixGender = boxParent.querySelector('td:nth-child(4)')
   const fixAge = boxParent.querySelector('td:nth-child(5)')
@@ -114,17 +114,22 @@ const editUser = (e, index) => {
   })
 }
 
+// Tiìm parent bên ngoài
+const getParent = (ele, parent) => {
+  while(ele.parentElement) {
+    if (ele.parentElement.matches(parent)) {
+      return ele.parentElement
+    }
+    ele = ele.parentElement
+  }
+}
+
 const editSave = (e, index) => {
   const activeTableinSave = e.target
-  const patentSave = activeTableinSave.parentElement
-  const boxParent = patentSave.parentElement.parentElement
-  const boxFixName = boxParent.querySelector('td:nth-child(3)')
-  const boxFixGender = boxParent.querySelector('td:nth-child(4)')
-  const boxFixAge = boxParent.querySelector('td:nth-child(5)')
-
-  const genderNew = boxFixGender.querySelector('.gender').value
-  const nameNew = boxFixName.querySelector('.full-name').value
-  const ageNew = boxFixAge.querySelector('.age').value
+  const boxParent = getParent(activeTableinSave, 'tr')
+  const genderNew = boxParent.querySelector('.gender').value
+  const nameNew = boxParent.querySelector('.full-name').value
+  const ageNew = boxParent.querySelector('.age').value
 
   users.map((user, i) => {
     if (index === i) {
@@ -133,30 +138,11 @@ const editSave = (e, index) => {
       user.age = ageNew
     }
   })
-  render()
+  render(users)
 }
 
-const editCancel = (e, index) => {
-  const activeCancel = e.target
-  const patentEdit = activeCancel.parentElement
-  const activeTableinSave = patentEdit.querySelector('.box_active-table--save')
-  const activeTableinEdit = patentEdit.querySelector('.box_active-table--edit')
-  activeTableinEdit.classList.remove('d-none')
-  activeTableinSave.classList.remove('d-inline-block')
-  activeCancel.classList.remove('d-inline-block')
-
-  const boxParent = patentEdit.parentElement.parentElement
-  const fixName = boxParent.querySelector('td:nth-child(3)')
-  const fixGender = boxParent.querySelector('td:nth-child(4)')
-  const fixAge = boxParent.querySelector('td:nth-child(5)')
-
-  users.forEach((user, i) => {
-    if (index === i) {
-      fixName.innerText = user.fullName
-      fixGender.innerText = user.gender
-      fixAge.innerText = user.age
-    }
-  })
+const editCancel = e => {
+  render(users)
 }
 
 const selectAll = () => {
@@ -164,20 +150,14 @@ const selectAll = () => {
   const checkAll = tableHeading.querySelector('input[type="checkbox"]')
   const listUser = document.querySelector('.list-user')
   const boxRow = listUser.querySelectorAll('tr')
-
-  if (checkAll.checked) {
-    boxRow.forEach(row => {
-      const boxSelect = row.querySelector('td:nth-child(1)')
-      const select = boxSelect.querySelector('input[type="checkbox"]')
+  boxRow.forEach(row => {
+    const select = row.querySelector('input[type="checkbox"]')
+    if (checkAll.checked) {
       select.setAttribute('checked','checked')
-    })
-  } else {
-    boxRow.forEach(row => {
-      const boxSelect = row.querySelector('td:nth-child(1)')
-      const select = boxSelect.querySelector('input[type="checkbox"]')
+    } else {
       select.removeAttribute('checked','checked')
-    })
-  }
+    }
+  })
 }
 
 const selectDelete = () => {
@@ -195,7 +175,7 @@ const selectDelete = () => {
       }
     }
   }
-  render()
+  render(users)
 }
 
 const overlayClose = () => {
@@ -219,6 +199,7 @@ const listEvent = () => {
   const btnSave = document.querySelector('.btn-save')
   btnSave.addEventListener('click',infoUser)
 
+  // btn add
   const btnAdd = document.querySelector('.btn-add')
   btnAdd.addEventListener('click', addUser)
 
@@ -231,4 +212,4 @@ const listEvent = () => {
   const checkAll = tableHeading.querySelector('input[type="checkbox"]')
   checkAll.addEventListener('click', selectAll)
 }
-render()
+render(users)
